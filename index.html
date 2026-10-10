@@ -127,12 +127,30 @@
       <path id="cross" d="M100 228 v16 M92 236 h16" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="2"/>
     </svg>`;
 
-    const archangelPrayers = {
+    const prayers = {
       michael: ["Saint Michael the Archangel, defend us in battle. Be our protection against the wickedness and snares of the devil. May God rebuke him, we humbly pray; and do thou, O Prince of the heavenly host, by the power of God, cast into hell Satan and all the evil spirits who prowl about the world seeking the ruin of souls. Amen."],
       gabriel: ["O God, who from among all your angels chose the Archangel Gabriel to announce the mystery of the Incarnation, mercifully grant that we who solemnly remember him on earth may feel the benefit of his patronage in heaven. Amen."],
-      raphael: ["O God, who gave the blessed Archangel Raphael to your servant Tobias as a companion on his journey, grant us, your servants, that we may always be protected by his patronage and strengthened by his help. Amen."]
+      raphael: ["O God, who gave the blessed Archangel Raphael to your servant Tobias as a companion on his journey, grant us, your servants, that we may always be protected by his patronage and strengthened by his help. Amen."],
+      anthony: ["O Holy St. Anthony, gentlest of Saints, your love for God and charity for His creatures made you worthy, when on earth, to possess miraculous powers. Encouraged by this thought, I implore you to obtain for me the grace I need. O gentle and loving St. Anthony, whisper my petition into the ears of the sweet Infant Jesus, who loved to be folded in your arms. Amen."],
+      jude: ["Most holy Apostle, St. Jude, faithful servant and friend of Jesus, the Church honors and invokes you universally as the patron of hopeless cases, of things almost despaired of. Pray for me, I am so helpless and alone. Intercede with God for me that He bring visible and speedy help where help is almost despaired of. Come to my assistance in this great need that I may receive the consolation and help of heaven in all my necessities, tribulations, and sufferings, and that I may praise God with you and all the saints forever. Amen."],
+      anne: ["Good St. Anne, you were especially favored by God to be the mother of the most holy Virgin Mary, the Mother of our Savior. By your power with your most pure daughter and with her divine Son, kindly obtain for us the grace and the favor we now seek. Please secure for us also forgiveness of our past sins, the strength to perform faithfully our daily duties, and the help we need to persevere in the love of Jesus and Mary. Amen."],
+      mary: ["Remember, O most gracious Virgin Mary, that never was it known that anyone who fled to thy protection, implored thy help, or sought thy intercession was left unaided. Inspired by this confidence, I fly unto thee, O Virgin of virgins, my Mother. To thee do I come, before thee I stand, sinful and sorrowful. O Mother of the Word Incarnate, despise not my petitions, but in thy mercy hear and answer me. Amen."],
+      joseph: ["O Saint Joseph, whose protection is so great, so strong, so prompt before the throne of God, I place in you all my interests and desires. O Saint Joseph, do assist me by your powerful intercession, and obtain for me from your Divine Son all spiritual blessings, through Jesus Christ, our Lord. Amen."],
+      francis: ["Most High, glorious God, enlighten the darkness of my heart and give me true faith, certain hope, and perfect charity, sense and knowledge, so that I may carry out Your holy and true command. Amen."],
+      benedict: ["Glorious Saint Benedict, sublime model of virtue, pure vessel of God’s grace, look kindly upon me. Protect me in the battle against evil; drive far from me the snares of the enemy, and obtain for me the grace to resist temptation, to live in peace, and to die in the friendship of God. Amen."]
     };
-    const archangelLabels = { michael: "St. Michael", gabriel: "St. Gabriel", raphael: "St. Raphael" };
+    const labels = {
+      michael: "St. Michael",
+      gabriel: "St. Gabriel",
+      raphael: "St. Raphael",
+      anthony: "St. Anthony",
+      jude: "St. Jude",
+      anne: "St. Anne",
+      mary: "St. Mary",
+      joseph: "St. Joseph",
+      francis: "St. Francis",
+      benedict: "St. Benedict"
+    };
 
     if (page === "home") {
       app.innerHTML = `<main>
@@ -143,19 +161,26 @@
           <a href="?page=michael">St. Michael<span>Defend us in battle.</span></a>
           <a href="?page=gabriel">St. Gabriel<span>Messenger of the Incarnation.</span></a>
           <a href="?page=raphael">St. Raphael<span>Healer and companion.</span></a>
+          <a href="?page=anthony">St. Anthony<span>Help for lost things and needs.</span></a>
+          <a href="?page=jude">St. Jude<span>Patron of hopeless cases.</span></a>
+          <a href="?page=anne">St. Anne<span>Mother of Mary, grandmother of Jesus.</span></a>
+          <a href="?page=mary">St. Mary<span>Mother of God.</span></a>
+          <a href="?page=joseph">St. Joseph<span>Foster father of Jesus, protector.</span></a>
+          <a href="?page=francis">St. Francis<span>Peace, simplicity, love of creation.</span></a>
+          <a href="?page=benedict">St. Benedict<span>Protection against evil.</span></a>
         </nav>
         <p class="support">Support: <a href="${FEEDING}" target="_blank">Feeding America</a> · <a href="${COFFEE}" target="_blank">Buy me a coffee</a></p>
       </main>`;
     }
 
-    if (page === "michael" || page === "gabriel" || page === "raphael") {
-      const lines = archangelPrayers[page];
-      const label = archangelLabels[page];
+    if (prayers[page]) {
+      const lines = prayers[page];
+      const label = labels[page];
       app.innerHTML = `<div id="bar"><a href="?">Back</a><span id="setlabel">${label}</span>${themeDots()}</div><div id="stage"><p id="line"></p>${rosarySVG}</div>`;
       bindDots();
       bindPause(document.getElementById("stage"));
       const line = document.getElementById("line");
-      const delays = delaysBetween(45, 70);
+      const delays = delaysBetween(94, 110);
       (async function run() {
         while (true) for (let i = 0; i < lines.length; i++) await typeLine(line, lines[i], delays, 2800);
       })();
@@ -208,7 +233,7 @@
         const cross = document.getElementById("cross");
         if (cross) cross.setAttribute("stroke-opacity", id === "cross" ? "1" : "0.35");
       }
-      const delays = delaysBetween(45, 70);
+      const delays = delaysBetween(94, 110);
       (async function run() {
         while (true) for (let i = 0; i < lines.length; i++) {
           markBead(lines[i].bead);
